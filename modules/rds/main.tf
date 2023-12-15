@@ -9,9 +9,19 @@ resource "aws_db_instance" "defaultDB" {
   parameter_group_name = "default.mysql5.7"
   skip_final_snapshot  = true
   multi_az = false
-  
+  db_subnet_group_name = aws_db_subnet_group.dbSubnetGroup.name
+  vpc_security_group_ids = [var.security_group_db_id]
   tags = {
     Name = "default-DB"
+  }
+}
+
+resource "aws_db_subnet_group" "dbSubnetGroup" {
+  name       = "main_subnet_group"
+  subnet_ids = [var.subnet_private1_id, var.subnet_private2_id]
+
+  tags = {
+    Name = "My DB subnet group"
   }
 }
 

@@ -134,3 +134,10 @@ resource "aws_route_table_association" "pu2" {
   subnet_id      = aws_subnet.subnet_public2.id
   route_table_id = aws_route_table.public_route_table.id
 }
+
+
+## Endpoint ##
+
+resource "aws_ec2_instance_connect_endpoint" "connectEndpoint" {
+  subnet_id = aws_subnet.subnet_private1.id
+}
